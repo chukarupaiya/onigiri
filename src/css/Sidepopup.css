@@ -1,0 +1,162 @@
+.outer-sidepopup{
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    
+    width: 300px;
+    background-color: white;
+    border-radius: 10px;
+    transition: 1.2s;
+    animation: sidepop 10s forwards;
+    animation-iteration-count: 1;
+    color: white;
+    background: #0e111aaa;
+    backdrop-filter: blur(8px);
+    overflow: hidden; 
+    z-index: 2000;
+    
+    
+}
+
+#close{
+    position:absolute;
+    top:-10px;
+    right:15px;
+    color: rgb(153, 161, 189);
+}
+
+#close:hover{
+    cursor: pointer;
+}
+
+#verified{
+    position: absolute;
+    top:20px;
+    left: 20px;
+    color: greenyellow;
+    font-size: 1.5rem;
+
+}
+
+.outer-sidepopup p ,.outer-sidepopup2 p{
+    padding-left: 60px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+}
+
+.outer-sidepopup a:nth-child(2),.outer-sidepopup2 a:nth-child(2){
+    color: rgb(153, 161, 189);
+    padding-left: 60px;
+    padding-top: 5px;
+    padding-bottom: 20px !important;
+    text-decoration: none;
+   
+    
+}
+
+.outer-sidepopup a:nth-child(2):hover,.outer-sidepopup2 a:nth-child(2):hover{
+   cursor:pointer
+    
+}
+
+
+
+/* .outer-sidepopup2{
+
+    top: 20%;
+    position: absolute;
+    right: -19%;
+    width: 300px;
+    background-color: white;
+    border-radius: 10px;
+    transition: 1.2s;
+    color: white;
+    background: #0e111aaa;
+    backdrop-filter: blur(8px);
+    overflow: hidden; 
+
+} */
+
+@keyframes sidepop {
+
+  0%{
+    right: -20%;
+  }
+
+
+  15%{
+    right: 5%;
+  }
+ 
+ 
+  75%{
+    right: 5%;
+  }
+
+  90%{
+    right: 5%;
+  }
+ 
+ 
+  100% {
+    
+    right: -20%;
+
+
+  }
+}
+
+.loader-line-parent{
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.loader-line {
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    bottom: 0;
+    overflow: hidden;
+    background-color:#1e2438aa;
+    margin: 0px auto;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+  }
+  
+  .loader-line:before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    height: 4px;
+    width: 100%;
+    background:linear-gradient(to right,rgb(0, 136, 255),rgb(136, 61, 255),rgb(255, 69, 199));
+    -webkit-animation: lineAnim 10s linear ;
+    -moz-animation: lineAnim 10s linear ;
+    animation: lineAnim 10s linear ;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+  }
+  
+  @keyframes lineAnim {
+    0% {
+      right: 0%;
+    }
+    50% {
+      
+      width: 100%;
+    }
+    100% {
+      
+      width: 100%;
+
+
+    }
+  }
+
+
+  
+

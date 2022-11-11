@@ -1,0 +1,66 @@
+.loading-outer{
+    background-color: #0e111aba;
+    border: 0.2px solid rgb(64, 64, 64);
+    backdrop-filter: blur(20px);
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 450px;
+    height: 350px;
+    color: white;
+    padding: 25px;
+    border-radius: 20px;
+    z-index: 2000;
+}
+
+.loading-outer button{
+    position: absolute;
+    top:15px;
+    right: 15px;
+    font-size: 30px;
+    background-color: transparent;
+    color: grey;
+
+    border: 0;
+
+
+}
+
+.loading-outer button:hover{
+    cursor: pointer;
+}
+
+
+.loading-inner1{
+    height: 65%;
+    
+}
+
+.loading-inner1 img{
+    width: 100%;
+    height: 100%;
+    object-fit:contain;
+}
+
+.loading-inner2{
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+.loading-inner2 p:nth-child(1){
+    margin: 8px;
+    font-size: 1.5rem;
+}
+
+.loading-inner2 p:nth-child(2){
+    margin: 8px;
+    font-size: 1.2rem;
+}
+
+.loading-inner2 p:nth-child(3){
+    margin: 8px;
+    font-size: 0.8rem;
+    color: grey;
+}

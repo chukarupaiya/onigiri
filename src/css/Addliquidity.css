@@ -1,0 +1,188 @@
+.outer-add {
+  width: 600px;
+  height: 800px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #0e111aaa;
+  color: white;
+  padding: 10px;
+  border-radius: 20px;
+  backdrop-filter: blur(8px); 
+}
+
+#img4{
+    position: absolute;
+    top:50%;
+    left: 30%;
+    transform: translate(-50%,-50%);
+    width: 35%;
+    
+}
+
+.outer-add #add-liq{
+    margin-left:15px;
+    font-size: 1.2rem;
+}
+
+.outer-add #add-liq2{
+    margin-left:15px;
+    font-size: 1.5rem;
+
+}
+
+
+.outer-add .line{
+    width: 95%;
+    background-color: rgba(153, 161, 189, 0.733);
+    height: 0.2px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.outer-add h4{
+    color: rgb(153, 161, 189);
+    margin-left: 15px;
+    font-size: 1.2rem;
+}
+
+.inner-add-1 {
+  background-color: rgb(20, 27, 43);
+  border-radius: 20px;
+  border: 0.01px solid rgba(107, 107, 107, 0.582);
+  padding-top: 10px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  width: 95%;
+  margin: auto;
+   
+}
+
+.inner-add-1-1 , .inner-add-1-2 ,.inner-add-1-3{
+    display: flex;
+    padding-left: 20px;
+    position: relative;
+    
+}
+
+.inner-add-1-1 p:nth-child(2) , .inner-add-1-2 p:nth-child(2) , .inner-add-1-3 p:nth-child(2){
+    position: absolute;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    top:0;
+    right: 20px;
+
+}
+
+.inner-add-1-1 p:nth-child(1) , .inner-add-1-2 p:nth-child(1) , .inner-add-1-3 p:nth-child(1){
+    
+    margin-top: 5px;
+   
+
+}
+
+.inner-add-2{
+    width: 100%;
+    display: flex;
+    
+}
+
+.inner-add-2-1 {
+  background-color: rgb(20, 27, 43);
+  width: 45%;
+  margin-left: 3%;
+ 
+  padding: 20px;
+  border-radius: 20px;
+  border: 0.01px solid rgba(107, 107, 107, 0.582);
+ 
+}
+
+
+
+.inner-add-2-2 {
+  background-color: rgb(20, 27, 43);
+  width: 45%;
+  margin-left: 3%;
+  margin-right: 3%;
+  padding: 20px;
+  border-radius: 20px;
+  border: 0.01px solid rgba(107, 107, 107, 0.582);
+}
+
+.inner-add-2-2 h4 , .inner-add-2-1 h4{
+
+    text-align: center;
+    margin: 5px;
+
+}
+
+.inner-add-2-2 h2, .inner-add-2-1 h2{
+
+    text-align: center;
+    margin: 5px;
+
+}
+
+.inner-add-2-2 h6 , .inner-add-2-1 h6{
+
+    width: 90%;
+    margin: auto;
+    font-weight: 100;
+    text-align: center;
+    color: rgb(153, 161, 189);
+    
+
+}
+    
+    .add-button{
+        
+    width: 90%;
+   
+    margin-left: 5%;
+    height: 50px;
+    border-radius: 15px;
+    border: 0;
+    font-size: 1rem;
+    background-color: #4c82fb;
+    color: white;
+    }
+
+    .add-button:hover{
+        cursor: pointer;
+    }
+
+
+    .inner-add-3{
+        width: 90%;
+        margin: auto;
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding: 10px;
+        border-radius: 20px;
+        border: 0.01px solid rgba(107, 107, 107, 0.582);
+        background-color: rgb(20, 27, 43);
+    }
+
+    .inner-add-3 h4{
+
+        margin-top:5px;
+        margin-bottom: 5px;
+        color: white;
+        font-size: 1.5rem;
+        text-align: center;
+        margin-left: 0;
+
+    } 
+
+    .inner-add-3 p{
+
+        margin-top: 5px;
+        margin-bottom: 5px;
+        color: rgb(153, 161, 189);
+        font-size: 0.9rem;
+
+    } 
