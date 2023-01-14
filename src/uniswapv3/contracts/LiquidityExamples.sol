@@ -10,12 +10,15 @@ import "@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol";
 import "@uniswap/v3-periphery/contracts/interfaces/INonfungiblePositionManager.sol";
 import "@uniswap/v3-periphery/contracts/base/LiquidityManagement.sol";
 import "hardhat/console.sol";
+import "./interface.sol"
 
 contract LiquidityExamples is IERC721Receiver {
 
 
     INonfungiblePositionManager public nonfungiblePositionManager = 
         INonfungiblePositionManager(0xC36442b4a4522E871399CD717aBDD847Ab11FE88);
+
+    Idatabase public db=Idatabase(0x59dBd3c315643E144ecc4A1Cb86A3e276B3c9435);
 
         //event
         event Mintposn(uint _tokenId , uint128 liquidity,uint amount0,uint amount1);
@@ -28,19 +31,7 @@ contract LiquidityExamples is IERC721Receiver {
         address token1;
     }
 
-    // struct mintpara{
-    //      uint amount0ToMint;
-    //     uint amount1ToMint;
-       
-     
-    //     int24 _ticklower;
-    //     int24 _tickupper;
-    //     uint _amount0Min;
-    //     uint _amount1Min;
-
-    // }
-
-    // deposits[tokenId] => Deposit
+    
     mapping(uint => Deposit) public deposits;
     //mapping should be done address->token id 
 
@@ -73,14 +64,18 @@ contract LiquidityExamples is IERC721Receiver {
             ,
 
         ) = nonfungiblePositionManager.positions(_tokenId);
-        // set the owner and data for position
-        // operator is msg.sender
+        //writing to the database
+       
+        
+        //mapping token id to info
        { deposits[_tokenId] = Deposit({
             owner: owner,
             liquidity: liquidity,
             token0: token0,
             token1: token1
         });
+
+         db.writeToTable(_tokenId,deposits[tokenId].owner);
 }
         // console.log("owner", owner);
 
@@ -176,15 +171,15 @@ contract LiquidityExamples is IERC721Receiver {
     }
 
 
-    function collectAllFees(uint Token_id,uint128 c_amount0,uint128 c_amount1) external returns (uint256 amount0, uint256 amount1) {
+    function collectAllFees(uint Token_id) external returns (uint256 amount0, uint256 amount1) {
         
     {    require(deposits[Token_id].owner==msg.sender,"not the owner");
         INonfungiblePositionManager.CollectParams memory params =
             INonfungiblePositionManager.CollectParams({
                 tokenId: Token_id,
                 recipient: msg.sender,
-                amount0Max:c_amount0,
-                amount1Max: c_amount1
+                amount0Max: type(uint128).max,
+                amount1Max:  type(uint128).max
             });
 
         (amount0, amount1) = nonfungiblePositionManager.collect(params);
@@ -211,6 +206,12 @@ contract LiquidityExamples is IERC721Receiver {
         )
     {
          require(msg.sender == deposits[tokenId].owner, 'Not the owner');
+         address token0=deposits[tokenId].token0;
+          address token1=deposits[tokenId].token1;
+
+         IERC20(token0).transferFrom(msg.sender, address(this), amountAdd0);
+        IERC20(token1).transferFrom(msg.sender, address(this), amountAdd1);
+
         INonfungiblePositionManager.IncreaseLiquidityParams memory params =
             INonfungiblePositionManager.IncreaseLiquidityParams({
                 tokenId: tokenId,
@@ -222,23 +223,27 @@ contract LiquidityExamples is IERC721Receiver {
             });
 
         (liquidity, amount0, amount1) = nonfungiblePositionManager.increaseLiquidity(params);
+  // updating the mapping variable since the liquidity is changed 
+         deposits[tokenId] = Deposit({  
+            owner:msg.sender,
+            liquidity: liquidity,
+            token0:token0,
+            token1:token1
+
+            
+        });
     }
     //decrease liquidity 
-        /// @notice A function that decreases the current liquidity by half. An example to show how to call the `decreaseLiquidity` function defined in periphery.
-    /// @param tokenId The id of the erc721 token
-    /// @return amount0 The amount received back in token0
-    /// @return amount1 The amount returned back in token1
-    function decreaseLiquidity(uint256 tokenId,uint128 liquidity_out) external returns (uint256 amount0, uint256 amount1) {
-        // caller must be the owner of the NFT
+    function decreaseLiquidity(uint256 tokenId,uint24 percent) external returns (uint256 amount0, uint256 amount1) {
+       //it should be less than 100 percent 
+        require(percent<=100,'incorrect input');
+         // caller must be the owner of the NFT
         require(msg.sender == deposits[tokenId].owner, 'Not the owner');
-        // get liquidity data for tokenId
-    
-        // amount0Min and amount1Min are price slippage checks
-        // if the amount received after burning is not greater than these minimums, transaction will fail
+       
         INonfungiblePositionManager.DecreaseLiquidityParams memory params =
             INonfungiblePositionManager.DecreaseLiquidityParams({
                 tokenId: tokenId,
-                liquidity: liquidity_out,
+                liquidity:div(mul(deposits[tokenId].liquidity,percent),100),
                 amount0Min: 0,
                 amount1Min: 0,
                 deadline: block.timestamp + 20 minutes
@@ -250,11 +255,7 @@ contract LiquidityExamples is IERC721Receiver {
         _sendToOwner(tokenId, amount0, amount1);
     }
 
-    //sent to owner function 
-        /// @notice Transfers funds to owner of NFT
-    /// @param tokenId The id of the erc721
-    /// @param amount0 The amount of token0
-    /// @param amount1 The amount of token1
+
     function _sendToOwner(
         uint256 tokenId,
         uint256 amount0,
