@@ -26,4 +26,5 @@ function Future_Plans() public{
   We aim to reach out to different chains including Phantom, Binance and Optimism in the future.  
 }
 }
+
 ```
